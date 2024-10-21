@@ -1,0 +1,117 @@
+:root{
+    --colorB1: #252525;
+    --colorB2: #3B3B3B;
+    --colorW: #ffffff;
+    --colorB: #000000;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+@font-face {
+    font-family: 'NunitoBold';
+    src: url(../public/fonts/Nunito-Bold.ttf);
+}
+@font-face {
+    font-family: 'NunitoRegular';
+    src: url(../public/fonts/Nunito-Regular.ttf);
+}
+
+
+
+#mainGrid{
+    position: absolute;
+    display: grid;
+    grid-template-rows: 30px 100px calc(100% - 130px);
+    background-color: var(--colorB1);
+    width: 100%;
+    height: 100%;
+}
+.mainGridSection{
+    position: relative;
+}
+#title{
+    margin-left: 20px;
+    position: absolute;
+    font-family: 'NunitoBold';
+    font-size: 38px;
+    color: var(--colorW);
+}
+
+#buttonsDiv{
+    display: grid;
+    grid-auto-flow: column;
+    gap: 20px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    display: grid;
+    width: 120px;
+    height: 60px;
+}
+.buttonsDivSection{
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: var(--colorB2);
+    border-radius: 10px;
+}
+
+#addBtn{
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--colorB1);
+    box-shadow: 0px 0px 10px 0px var(--colorB);
+}
+.menuIcon{
+    width: 24px;
+    height: 24px;
+}
+
+
+#noNotesYet{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+#noNotesImg{
+    width: 300px;
+}
+#noNotesText{
+    font-family: 'NunitoRegular';
+    color: var(--colorW);
+    font-size: 24px;
+}
+
+
+
+
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.centerV{
+    display: flex;
+    align-items: center;
+}
