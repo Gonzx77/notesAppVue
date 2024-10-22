@@ -11,6 +11,7 @@
     box-sizing: border-box;
 }
 body{
+    user-select: none !important;
     position: relative;
     width: 100vw;
     height: 100vh;
