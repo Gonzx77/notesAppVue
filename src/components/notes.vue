@@ -1,14 +1,23 @@
 <template>
   <div>
-    <div v-if="notes.length > 0">
+    <div class="noteOpenDiv" v-if="selectedNote">
+      <div class="noteOpenDivSection">
+        <input v-model="selectedNote.titulo" class="noteTitleInput" placeholder="Titulo..."/>
+      </div>
+      <div class="noteOpenDivSection">
+        <textarea v-model="selectedNote.contenido" class="noteContentInput" placeholder="Contenido..."></textarea>
+      </div>
+    </div>
+    <div v-else-if="notes.length > 0">
       <div
         v-for="note in notes"
         :key="note._id"
         class="noteDiv"
         :title="note.contenido.length > 30 ? note.contenido.substring(0, 30) + '...' : note.contenido"
         :style="{ backgroundColor: getRandomCreamColor() }"
+        @click="selectNote(note)"
       >
-        <h1 class="noteTitle">{{ note.titulo }}</h1>
+        <h1 class="noteTitle">{{ note.titulo.length > 44 ? note.titulo.substring(0, 44) + '...' : note.titulo }}</h1>
       </div>
     </div>
     
@@ -19,12 +28,14 @@
   </div>
 </template>
 
+
 <script>
 export default {
   name: 'notes',
   data() {
     return {
-      notes: []
+      notes: [],
+      selectedNote: null
     };
   },
   async mounted() {
@@ -38,12 +49,15 @@ export default {
     }
   },
   methods: {
-      getRandomCreamColor() {
-    const r = Math.floor(Math.random() * 80 + 60);
-    const g = Math.floor(Math.random() * 80 + 60);
-    const b = Math.floor(Math.random() * 80 + 60);
-    return `rgb(${r}, ${g}, ${b})`;
-  }
+    getRandomCreamColor() {
+      const r = Math.floor(Math.random() * 80 + 60);
+      const g = Math.floor(Math.random() * 80 + 60);
+      const b = Math.floor(Math.random() * 80 + 60);
+      return `rgb(${r}, ${g}, ${b})`;
+    },
+    selectNote(note) {
+      this.selectedNote = note;
+    }
   }
 }
 </script>
