@@ -39,9 +39,9 @@ export default {
   },
   methods: {
       getRandomCreamColor() {
-    const r = Math.floor(Math.random() * 56 + 50);
-    const g = Math.floor(Math.random() * 56 + 50);
-    const b = Math.floor(Math.random() * 56 + 50);
+    const r = Math.floor(Math.random() * 80 + 60);
+    const g = Math.floor(Math.random() * 80 + 60);
+    const b = Math.floor(Math.random() * 80 + 60);
     return `rgb(${r}, ${g}, ${b})`;
   }
   }
