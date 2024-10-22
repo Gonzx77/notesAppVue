@@ -5,9 +5,10 @@
         v-for="note in notes"
         :key="note._id"
         class="noteDiv"
+        :title="note.contenido.length > 30 ? note.contenido.substring(0, 30) + '...' : note.contenido"
         :style="{ backgroundColor: getRandomCreamColor() }"
       >
-        <h1 class="noteTitle">{{ note.title }}</h1>
+        <h1 class="noteTitle">{{ note.titulo }}</h1>
       </div>
     </div>
     
