@@ -112,6 +112,7 @@ body{
     overflow-y: auto;
 }
 .noteDiv{
+    transition: 0.2s;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -121,9 +122,10 @@ body{
     height: 170px;
     background-color: #3B3B3B;
     border-radius: 20px;
+    box-shadow: 0px 0px 20px 0px var(--colorB1);
 }
 .noteDiv:hover{
-    box-shadow: 0px 0px 0px 2px var(--colorW);
+    transform: scale(1.02);
 }
 .noteTitle{
     font-size: 30px;
