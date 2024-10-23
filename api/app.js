@@ -27,7 +27,7 @@ app.post('/updateNote', async (req, res) => {
     try {
         let data = req.body;
         let updatedNote = await updateNote(data);
-        res.status(200).json(updatedNote);
+        res.status(200);
     } catch (err) {
         res.status(500).json({ error: 'Error al actualizar la nota' });
     }

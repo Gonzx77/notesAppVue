@@ -66,9 +66,9 @@ export default {
     },
     async saveNote() {
       if (this.selectedNote) {
-        const confirmation = prompt('¿Desea guardar los datos? Escriba "si" para confirmar:');
+        const confirmation = confirm('¿Desea guardar los datos?');
 
-        if (confirmation && confirmation.toLowerCase() === 'si') {
+        if (confirmation) {
           try {
             const response = await fetch('http://localhost:5000/updateNote', {
               method: 'POST',
@@ -83,7 +83,8 @@ export default {
             });
 
             if (!response.ok) {
-              throw new Error('Error al guardar la nota');
+              const errorData = await response.json();
+              throw new Error(`Error al guardar la nota: ${errorData.message || 'Error desconocido'}`);
             }
 
             const data = await response.json();
@@ -91,12 +92,14 @@ export default {
 
           } catch (error) {
             console.error('Error al guardar la nota:', error);
+            alert('Ocurrió un error al guardar la nota. Por favor, inténtelo de nuevo.');a
           }
         } else {
           console.log('Guardado cancelado por el usuario.');
         }
       } else {
         console.log('No hay ninguna nota seleccionada');
+        alert('Por favor, selecciona una nota para guardar.');
       }
     },
     selectNote(note) {
