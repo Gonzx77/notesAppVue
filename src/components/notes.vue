@@ -31,7 +31,7 @@
       <img class="menuIcon" src="../../public/images/save.svg">
     </div>
 
-    <div v-if="showInfoBtn" @click="goBack" class="buttonsDivSection center" id="backBtn">
+    <div v-if="showInfoBtn" @click="refreshPage" class="buttonsDivSection center" id="backBtn">
       <img class="menuIcon" src="../../public/images/back.svg">
     </div>
   </div>
@@ -63,6 +63,9 @@ export default {
       const g = Math.floor(Math.random() * 80 + 60);
       const b = Math.floor(Math.random() * 80 + 60);
       return `rgb(${r}, ${g}, ${b})`;
+    },
+    refreshPage() {
+      window.location.reload();
     },
     async saveNote() {
       if (this.selectedNote) {
@@ -125,30 +128,7 @@ export default {
       }
 
       this.showInfoBtn = true;
-    },
-    goBack() {
-      const addBtn = document.getElementById('addBtn');
-      const searchBtn = document.getElementById('searchBtn');
-      const infoBtn = document.getElementById('infoBtn');
-      const title = document.getElementById('title');
-
-      if (addBtn) {
-        addBtn.style.display = 'flex';
-      }
-      if (searchBtn) {
-        searchBtn.style.opacity = 1;
-        searchBtn.style.cursor = 'pointer';
-      }
-      if (infoBtn) {
-        infoBtn.style.display = 'flex';
-      }
-      if (title) {
-        title.style.display = 'flex';
-      }
-
-      this.selectedNote = null;
-      this.showInfoBtn = false;
-    },
+    }
   }
 }
 </script>
