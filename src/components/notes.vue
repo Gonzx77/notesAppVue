@@ -64,13 +64,37 @@ export default {
       const b = Math.floor(Math.random() * 80 + 60);
       return `rgb(${r}, ${g}, ${b})`;
     },
-    saveNote() {
+    async saveNote() {
       if (this.selectedNote) {
-        console.log({
-          id: this.selectedNote._id,
-          titulo: this.selectedNote.titulo,
-          contenido: this.selectedNote.contenido
-        });
+        const confirmation = prompt('¿Desea guardar los datos? Escriba "si" para confirmar:');
+
+        if (confirmation && confirmation.toLowerCase() === 'si') {
+          try {
+            const response = await fetch('http://localhost:5000/updateNote', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                id: this.selectedNote._id,
+                titulo: this.selectedNote.titulo,
+                contenido: this.selectedNote.contenido
+              })
+            });
+
+            if (!response.ok) {
+              throw new Error('Error al guardar la nota');
+            }
+
+            const data = await response.json();
+            console.log('Nota guardada:', data);
+
+          } catch (error) {
+            console.error('Error al guardar la nota:', error);
+          }
+        } else {
+          console.log('Guardado cancelado por el usuario.');
+        }
       } else {
         console.log('No hay ninguna nota seleccionada');
       }
@@ -120,7 +144,6 @@ export default {
       }
 
       this.selectedNote = null;
-
       this.showInfoBtn = false;
     },
   }

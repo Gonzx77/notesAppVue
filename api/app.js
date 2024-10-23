@@ -2,6 +2,7 @@ const express = require('express');
 const { join } = require('path');
 const cors = require('cors');
 const getNotes = require('./modules/getNotes');
+const updateNote = require('./modules/updateNote');
 
 const app = express();
 const port = 5000;
@@ -21,6 +22,17 @@ app.get('/notes', async (req, res) => {
     }
 
 });
+
+app.post('/updateNote', async (req, res) => {
+    try {
+        let data = req.body;
+        let updatedNote = await updateNote(data);
+        res.status(200).json(updatedNote);
+    } catch (err) {
+        res.status(500).json({ error: 'Error al actualizar la nota' });
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
