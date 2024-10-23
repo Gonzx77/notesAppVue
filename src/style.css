@@ -143,9 +143,9 @@ body{
     margin-left: 5%;
     display: grid;
     grid-template-rows: auto 1fr;
-  }
-  
-  .noteTitleInput {
+}
+
+.noteTitleInput {
     border: none;
     font-family: 'NunitoBold';
     color: var(--colorW);
@@ -153,9 +153,9 @@ body{
     font-size: 40px;
     outline: none;
     background-color: var(--colorB1);
-  }
-  
-  .noteContentInput {
+}
+
+.noteContentInput {
     font-family: 'NunitoRegular';
     color: var(--colorW);
     background-color: var(--colorB1);
@@ -166,7 +166,21 @@ body{
     border: none;
     outline: none;
     resize: none;
-  }
+}
+#saveBtn{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+#backBtn{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
 
 
 

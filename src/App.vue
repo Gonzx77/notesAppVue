@@ -5,10 +5,10 @@
         <h1 id="title">Notes</h1>
   
         <div id="buttonsDiv">
-          <div class="buttonsDivSection center">
+          <div class="buttonsDivSection center" id="searchBtn">
             <img class="menuIcon" src="../public/images/search.svg">
           </div>
-          <div class="buttonsDivSection center">
+          <div class="buttonsDivSection center" id="infoBtn">
             <img class="menuIcon" src="../public/images/info.svg">
           </div>
         </div>
