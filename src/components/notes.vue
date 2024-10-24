@@ -27,12 +27,20 @@
       <p id="noNotesText">Create your first note!</p>
     </div>
 
+    <div v-if="showInfoBtn && selectedNote && selectedNote._id" @click="deleteNote" class="buttonsDivSection center" id="deleteBtn">
+      <img class="menuIcon2" src="../../public/images/trash.svg">
+    </div>
+
     <div v-if="showInfoBtn" @click="saveNote" class="buttonsDivSection center" id="saveBtn">
       <img class="menuIcon" src="../../public/images/save.svg">
     </div>
 
     <div v-if="showInfoBtn" @click="refreshPage" class="buttonsDivSection center" id="backBtn">
       <img class="menuIcon" src="../../public/images/back.svg">
+    </div>
+
+    <div id="addBtn" class="center" @click="createNewNote">
+      <img class="menuIcon" src="../../public/images/add.svg">
     </div>
   </div>
 </template>
@@ -67,9 +75,33 @@ export default {
     refreshPage() {
       window.location.reload();
     },
+    async deleteNote() {
+      if (this.selectedNote && this.selectedNote._id) {
+
+        const confirmation = confirm('¿Desea eliminar la nota?');
+
+        if (confirmation) {
+          try {
+            const response = await fetch('http://localhost:5000/deleteNote', {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                id: this.selectedNote._id,
+              })
+            });
+
+          } catch (error) {
+            console.error('Error al eliminar la nota:', error);
+          }
+        }
+      }
+    },
     async saveNote() {
       if (this.selectedNote) {
-        const confirmation = confirm('¿Desea guardar los datos?');
+
+        const confirmation = confirm('¿Desea guardar la nota?');
 
         if (confirmation) {
           try {
@@ -90,24 +122,28 @@ export default {
               throw new Error(`Error al guardar la nota: ${errorData.message || 'Error desconocido'}`);
             }
 
-            const data = await response.json();
-            console.log('Nota guardada:', data);
-
+            alert('Nota guardada')
           } catch (error) {
             console.error('Error al guardar la nota:', error);
-            alert('Ocurrió un error al guardar la nota. Por favor, inténtelo de nuevo.');a
           }
-        } else {
-          console.log('Guardado cancelado por el usuario.');
         }
-      } else {
-        console.log('No hay ninguna nota seleccionada');
-        alert('Por favor, selecciona una nota para guardar.');
       }
     },
     selectNote(note) {
       this.selectedNote = note;
-
+      this.hideMenuButtons();
+      this.showInfoBtn = true;
+    },
+    createNewNote() {
+      this.selectedNote = {
+        _id: null,
+        titulo: '',
+        contenido: ''
+      };
+      this.hideMenuButtons();
+      this.showInfoBtn = true;
+    },
+    hideMenuButtons() {
       const addBtn = document.getElementById('addBtn');
       const searchBtn = document.getElementById('searchBtn');
       const infoBtn = document.getElementById('infoBtn');
@@ -126,8 +162,6 @@ export default {
       if (title) {
         title.style.display = 'none';
       }
-
-      this.showInfoBtn = true;
     }
   }
 }

@@ -3,6 +3,8 @@ const { join } = require('path');
 const cors = require('cors');
 const getNotes = require('./modules/getNotes');
 const updateNote = require('./modules/updateNote');
+const createNote = require('./modules/createNote');
+const deleteNote = require('./modules/deleteNote');
 
 const app = express();
 const port = 5000;
@@ -20,16 +22,34 @@ app.get('/notes', async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: 'Error al consultar las notas'});
     }
+});
 
+app.delete('/deleteNote', async (req, res) => {
+    const data = req.body;
+    try {
+        await deleteNote(data);
+        res.status(200);
+    } catch (err) {
+        res.status(500).json({ error: 'Error al consultar las notas'});
+    }
 });
 
 app.post('/updateNote', async (req, res) => {
-    try {
-        let data = req.body;
-        let updatedNote = await updateNote(data);
-        res.status(200);
-    } catch (err) {
-        res.status(500).json({ error: 'Error al actualizar la nota' });
+    const data = req.body;
+    if (data.id === null) {
+        try {
+            await createNote(data);
+            res.status(200);
+        } catch (err) {
+            res.status(500).json({ error: 'Error al actualizar la nota' });
+        }
+    } else {
+        try {
+            await updateNote(data);
+            res.status(200);
+        } catch (err) {
+            res.status(500).json({ error: 'Error al actualizar la nota' });
+        }
     }
 });
 

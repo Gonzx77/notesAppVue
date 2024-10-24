@@ -83,6 +83,11 @@ body{
     width: 24px;
     height: 24px;
 }
+.menuIcon2{
+    filter: invert();
+    width: 24px;
+    height: 24px;
+}
 
 
 #noNotesYet{
@@ -166,6 +171,13 @@ body{
     border: none;
     outline: none;
     resize: none;
+}
+#deleteBtn{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 10px;
+    margin-right: 90px;
 }
 #saveBtn{
     position: absolute;

@@ -17,9 +17,6 @@
       <div class="mainGridSection" id="notesGallery">
         <notes />
         
-        <div id="addBtn" class="center">
-          <img class="menuIcon" src="../public/images/add.svg">
-        </div>
       </div>
     </div>
   </template>
