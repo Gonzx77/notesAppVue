@@ -48,22 +48,17 @@
 <script>
 export default {
   name: 'notes',
+  props: {
+    notes: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
-      notes: [],
       selectedNote: null,
       showInfoBtn: false,
     };
-  },
-  async mounted() {
-    try {
-      const response = await fetch('http://localhost:5000/notes');
-      if (!response.ok) throw new Error('Error en la red');
-      const data = await response.json();
-      this.notes = data;
-    } catch (error) {
-      console.error('Error al obtener notas:', error);
-    }
   },
   methods: {
     getRandomCreamColor() {
@@ -77,9 +72,7 @@ export default {
     },
     async deleteNote() {
       if (this.selectedNote && this.selectedNote._id) {
-
         const confirmation = confirm('¿Desea eliminar la nota?');
-
         if (confirmation) {
           try {
             const response = await fetch('http://localhost:5000/deleteNote', {
@@ -91,7 +84,6 @@ export default {
                 id: this.selectedNote._id,
               })
             });
-
           } catch (error) {
             console.error('Error al eliminar la nota:', error);
           }
@@ -100,9 +92,7 @@ export default {
     },
     async saveNote() {
       if (this.selectedNote) {
-
         const confirmation = confirm('¿Desea guardar la nota?');
-
         if (confirmation) {
           try {
             const response = await fetch('http://localhost:5000/updateNote', {

@@ -5,6 +5,7 @@ const getNotes = require('./modules/getNotes');
 const updateNote = require('./modules/updateNote');
 const createNote = require('./modules/createNote');
 const deleteNote = require('./modules/deleteNote');
+const searchNotes = require('./modules/searchNotes');
 
 const app = express();
 const port = 5000;
@@ -23,6 +24,25 @@ app.get('/notes', async (req, res) => {
         res.status(500).json({ error: 'Error al consultar las notas'});
     }
 });
+
+app.get('/searchNotes', async (req, res) => {
+    const { text } = req.query;
+    try {
+        let data;
+        
+        if (!text || text.trim() === '') {
+            data = await searchNotes('')
+        } else {
+            data = await searchNotes(text);
+        }
+
+        res.status(200).json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error al consultar las notas' });
+    }
+});
+
 
 app.delete('/deleteNote', async (req, res) => {
     const data = req.body;

@@ -22,7 +22,7 @@
     </div>
     
     <div class="mainGridSection" id="notesGallery">
-      <notes />
+      <notes :notes="filteredNotes" />
     </div>
   </div>
 </template>
@@ -37,15 +37,40 @@ export default {
   },
   data() {
     return {
-      isTitleVisible: true
+      isTitleVisible: true,
+      allNotes: [],
+      filteredNotes: []
     };
   },
   methods: {
     toggleSearch() {
       this.isTitleVisible = !this.isTitleVisible;
     },
-    logSearch(event) {
-      let seacrhText = event.target.value;
+    async logSearch(event) {
+      const searchText = event.target.value;
+
+      try {
+        const response = await fetch(`http://localhost:5000/searchNotes?text=${searchText}`);
+        if (!response.ok) throw new Error('Error en la red');
+        const data = await response.json();
+
+        this.filteredNotes = data;
+
+        event.target.value = '';
+      } catch (error) {
+        console.error('Error al buscar notas:', error);
+      }
+    }
+  },
+  async mounted() {
+    try {
+      const response = await fetch('http://localhost:5000/notes');
+      if (!response.ok) throw new Error('Error en la red');
+      const data = await response.json();
+      this.allNotes = data;
+      this.filteredNotes = data;
+    } catch (error) {
+      console.error('Error al obtener notas:', error);
     }
   }
 }
