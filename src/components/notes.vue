@@ -68,12 +68,18 @@ export default {
       return `rgb(${r}, ${g}, ${b})`;
     },
     refreshPage() {
-      window.location.reload();
+      const confirmation = confirm(
+`¿Estas seguro de retroceder? 
+Todo cambio sin guardar sera descartado !`);
+      if (confirmation) {
+        window.location.reload();
+      }
     },
     async deleteNote() {
       if (this.selectedNote && this.selectedNote._id) {
         const confirmation = confirm('¿Desea eliminar la nota?');
         if (confirmation) {
+          window.location.reload();
           try {
             const response = await fetch('http://localhost:5000/deleteNote', {
               method: 'DELETE',
