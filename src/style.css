@@ -49,6 +49,7 @@ body{
 #searchBar{
     padding-left: 20px;
     font-size: 20px;
+    font-family: 'NunitoRegular';
     color: var(--colorW);
     width: calc(100% - 180px);
     margin-left: 20px;
