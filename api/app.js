@@ -1,12 +1,6 @@
 const express = require('express');
 const { join } = require('path');
 const cors = require('cors');
-const getNotes = require('./modules/getNotes');
-const updateNote = require('./modules/updateNote');
-const createNote = require('./modules/createNote');
-const deleteNote = require('./modules/deleteNote');
-const searchNotes = require('./modules/searchNotes');
-const getNote = require('./modules/getNote');
 
 const app = express();
 const port = 5000;
