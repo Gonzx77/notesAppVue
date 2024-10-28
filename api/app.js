@@ -6,9 +6,11 @@ const updateNote = require('./modules/updateNote');
 const createNote = require('./modules/createNote');
 const deleteNote = require('./modules/deleteNote');
 const searchNotes = require('./modules/searchNotes');
+const getNote = require('./modules/getNote');
 
 const app = express();
 const port = 5000;
+const router = require('./router/router');
 
 app.use(express.json());
 app.use(cors());
@@ -16,62 +18,7 @@ app.use(cors());
 let dir = __dirname;
 dir = dir.slice(0, -3);
 
-app.get('/notes', async (req, res) => {
-    try {
-        let data = await getNotes();
-        res.status(200).json(data);
-    } catch (err) {
-        res.status(500).json({ error: 'Error al consultar las notas'});
-    }
-});
-
-app.get('/searchNotes', async (req, res) => {
-    const { text } = req.query;
-    try {
-        let data;
-        
-        if (!text || text.trim() === '') {
-            data = await searchNotes('')
-        } else {
-            data = await searchNotes(text);
-        }
-
-        res.status(200).json(data);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Error al consultar las notas' });
-    }
-});
-
-
-app.delete('/deleteNote', async (req, res) => {
-    const data = req.body;
-    try {
-        await deleteNote(data);
-        res.status(200);
-    } catch (err) {
-        res.status(500).json({ error: 'Error al consultar las notas'});
-    }
-});
-
-app.post('/updateNote', async (req, res) => {
-    const data = req.body;
-    if (data.id === null) {
-        try {
-            await createNote(data);
-            res.status(200);
-        } catch (err) {
-            res.status(500).json({ error: 'Error al actualizar la nota' });
-        }
-    } else {
-        try {
-            await updateNote(data);
-            res.status(200);
-        } catch (err) {
-            res.status(500).json({ error: 'Error al actualizar la nota' });
-        }
-    }
-});
+app.use('/notes', router);
 
 
 app.listen(port, () => {

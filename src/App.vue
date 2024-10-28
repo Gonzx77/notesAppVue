@@ -50,7 +50,7 @@ export default {
       const searchText = event.target.value;
 
       try {
-        const response = await fetch(`http://localhost:5000/searchNotes?text=${searchText}`);
+        const response = await fetch(`http://localhost:5000/notes/search?text=${searchText}`);
         if (!response.ok) throw new Error('Error en la red');
         const data = await response.json();
 
