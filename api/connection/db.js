@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb://root:campus2023@localhost:27017/';
+const uri = 'mongodb://mongo:TVrGoUhUyjtlXVjVDSMliWWvlOxVZaMU@autorack.proxy.rlwy.net:38519';
 const client = new MongoClient(uri);
 
 const connectDB = async () => {
