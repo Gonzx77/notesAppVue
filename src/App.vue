@@ -50,7 +50,7 @@ export default {
       const searchText = event.target.value;
 
       try {
-        const response = await fetch(`http://localhost:5000/notes/search?text=${searchText}`);
+        const response = await fetch(`https://notes-app-vue-zeta.vercel.app/notes/search?text=${searchText}`);
         if (!response.ok) throw new Error('Error en la red');
         const data = await response.json();
 
@@ -64,7 +64,7 @@ export default {
   },
   async mounted() {
     try {
-      const response = await fetch('http://localhost:5000/notes');
+      const response = await fetch('https://notes-app-vue-zeta.vercel.app/notes');
       if (!response.ok) throw new Error('Error en la red');
       const data = await response.json();
       this.allNotes = data;

@@ -81,7 +81,7 @@ Todo cambio sin guardar sera descartado !`);
         if (confirmation) {
           window.location.reload();
           try {
-            const response = await fetch('http://localhost:5000/notes/delete', {
+            const response = await fetch('https://notes-app-vue-zeta.vercel.app/notes/delete', {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ Todo cambio sin guardar sera descartado !`);
         const confirmation = confirm('¿Desea guardar la nota?');
         if (confirmation) {
           try {
-            const response = await fetch('http://localhost:5000/notes/update', {
+            const response = await fetch('https://notes-app-vue-zeta.vercel.app/notes/update', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
