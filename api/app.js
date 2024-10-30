@@ -13,6 +13,10 @@ let dir = __dirname;
 dir = dir.slice(0, -3);
 
 app.use('/notes', router);
+app.get('/', (req, res) => {
+    res.send('Servidor montado');
+});
+
 
 
 app.listen(port, () => {
